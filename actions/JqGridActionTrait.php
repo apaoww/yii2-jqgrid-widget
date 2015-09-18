@@ -5,7 +5,7 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace himiklab\jqgrid\actions;
+namespace apaoww\jqgrid\actions;
 
 use Yii;
 use yii\data\Pagination;

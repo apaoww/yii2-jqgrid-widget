@@ -5,18 +5,18 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace himiklab\jqgrid;
+namespace apaoww\jqgrid;
 
 use Yii;
 use yii\web\AssetBundle;
 
 class WidgetAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/himiklab/yii2-jqgrid-widget/assets';
+    public $sourcePath = '@vendor/apaoww/yii2-jqgrid-widget/assets';
 
     public $depends = [
         'yii\jui\JuiAsset',
-        'himiklab\jqgrid\JqGridAsset'
+        'apaoww\jqgrid\JqGridAsset'
     ];
 
     public $js =  [

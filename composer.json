@@ -5,8 +5,8 @@
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "source": "https://github.com/himiklab/yii2-jqgrid-widget",
-        "issues": "https://github.com/himiklab/yii2-jqgrid-widget/issues"
+        "source": "https://github.com/apaoww/yii2-jqgrid-widget",
+        "issues": "https://github.com/apaoww/yii2-jqgrid-widget/issues"
     },
     "authors": [
         {

@@ -5,7 +5,7 @@
  * @license http://opensource.org/licenses/MIT MIT
  */
 
-namespace himiklab\jqgrid;
+namespace apaoww\jqgrid;
 
 use yii\base\InvalidParamException;
 use yii\base\Widget;
