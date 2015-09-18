@@ -9,13 +9,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 * Either run
 
 ```
-php composer.phar require --prefer-dist "himiklab/yii2-jqgrid-widget" "*"
+php composer.phar require  "apaoww/yii2-jqgrid-widget" "dev-master"
 ```
 
 or add
 
 ```json
-"himiklab/yii2-jqgrid-widget" : "*"
+"apaoww/yii2-jqgrid-widget" : "dev-master"
 ```
 
 to the require section of your application's `composer.json` file.
@@ -23,7 +23,7 @@ to the require section of your application's `composer.json` file.
 * Add action in the controller (optional), for example:
 
 ```php
-use himiklab\jqgrid\actions\JqGridActiveAction;
+use apaoww\jqgrid\actions\JqGridActiveAction;
 
 public function actions()
 {
@@ -43,7 +43,7 @@ public function actions()
 * View's example:
 
 ```php
-use himiklab\jqgrid\JqGridWidget;
+use apaoww\jqgrid\JqGridWidget;
 use yii\helpers\Url;
 
 <?= JqGridWidget::widget([
