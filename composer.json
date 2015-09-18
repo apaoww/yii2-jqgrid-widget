@@ -1,5 +1,5 @@
 {
-    "name": "himiklab/yii2-jqgrid-widget",
+    "name": "apaoww/yii2-jqgrid-widget",
     "description": "A powerful ajax-enabled grid widget for Yii2",
     "keywords": ["yii2", "jqgrid", "grid", "ajax", "widget"],
     "type": "yii2-extension",
@@ -10,8 +10,8 @@
     },
     "authors": [
         {
-            "name": "HimikLab",
-            "homepage": "https://github.com/himiklab"
+            "name": "Apaoww",
+            "homepage": "https://github.com/apaoww"
         }
     ],
     "require": {
