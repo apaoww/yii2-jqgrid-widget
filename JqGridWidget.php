@@ -224,7 +224,7 @@ class JqGridWidget extends Widget
                     $editSettings['url'] = Url::to([$this->requestUrl, 'action'=> 'edit']);
                     $editSettings['afterSubmit'] = new JsExpression('
                     function(response){
-                        return [response.responseText == "", response.responseText, null];
+                        return [response.responseText == "", JSON.parse(response.responseText), null];
                     }');
                     $pagerOptions['edit'] = array_merge($editSettings, $optionSettings);
                     break;

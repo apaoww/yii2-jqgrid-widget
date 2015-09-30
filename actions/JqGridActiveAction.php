@@ -14,6 +14,7 @@ use yii\data\ActiveDataProvider;
 use yii\data\Sort;
 use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
+use yii\web\NotAcceptableHttpException;
 use yii\web\Response;
 
 /**
@@ -71,7 +72,7 @@ class JqGridActiveAction extends Action
             $this->columns = call_user_func($this->columns);
         }
 
-        /** @var array $this->columns */
+        /** @var array $this ->columns */
         // add PK if it exist and not set to $this->columns
         $model = $this->model;
         $modelPK = $model::primaryKey();
@@ -173,16 +174,21 @@ class JqGridActiveAction extends Action
         }
 
         /** @var \yii\db\ActiveRecord $record */
-        if (($record = $model::findOne($requestData['id'])) === null) {
+        if (($record = $model::findOne(['ROWID' => $requestData['id']])) === null) {
             return;
         }
 
         $relationColumns = [];
+        $mcol = [];
+        $mColVal = [];
+        $i = 0;
         foreach ($this->columns as $column) {
             if (isset($requestData[$column])) {
                 if ((strpos($column, '.')) === false) {
                     // no relation
                     $record->$column = $requestData[$column];
+                    $mcol[$i] = $column;
+                    $mColVal[$i] = $requestData[$column];
                 } else {
                     // with relation
                     preg_match('/(.+)\.([^\.]+)/', $column, $matches);
@@ -191,10 +197,12 @@ class JqGridActiveAction extends Action
                         'value' => $requestData[$column]
                     ];
                 }
+                $i++;
             }
         }
 
         $transaction = Yii::$app->db->beginTransaction();
+        $connection = \Yii::$app->db;
         try {
             if (count($relationColumns)) {
                 foreach ($relationColumns as $relationName => $columns) {
@@ -225,7 +233,19 @@ class JqGridActiveAction extends Action
                 }
             }
 
-            if (!$record->save()) {
+             /*$connection->createCommand()
+                ->update($this->model->tableName(), [$mcol[1] => $mColVal[1]], ['ROWID' => $requestData['id']])
+                ->execute();*/
+            try{
+                $connection->createCommand()
+                    ->update($this->model->tableName(), [$mcol[1] => $mColVal[1]], ['ROWID' => $requestData['id']])
+                    ->execute();
+            }
+            catch(\yii\db\Exception $e){
+                throw new NotAcceptableHttpException('Policy not allowed.');
+            }
+
+            /*if (!$record->save()) {
                 $errors = '';
                 foreach ($record->errors as $error) {
                     $errors .= (implode(' ', $error) . ' ');
@@ -234,7 +254,7 @@ class JqGridActiveAction extends Action
                 $transaction->rollBack();
                 echo $errors;
                 return;
-            }
+            }*/
         } catch (\Exception $e) {
             $transaction->rollBack();
             throw $e;
